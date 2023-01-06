@@ -17,4 +17,23 @@ const deleteProduct = async (id) => {
   return response.data;
 };
 
-export { addProduct, deleteProduct };
+const updateProduct = async (id, body) => {
+  const config = {
+    headers: {
+      accept: '*/*', //Permite cualquier petición
+      'Content-Type': 'application/json',
+    },
+  };
+  //console.log(body);
+  try {
+    const response = await axios.put(endPoints.products.updateProducts(id), body, config);
+    console.log(`producto actualizado con ${id} actualizado.`);
+    return response.data; //data contiene la respuesta del servidor
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  //const response = await axios.put(endPoints.products.updateProducts(id), body);
+};
+
+export { addProduct, deleteProduct, updateProduct };
